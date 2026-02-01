@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Be My Valentine 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --pink: #ff4d6d;
+  --soft-pink: #ffe5ec;
+  --glass: rgba(255, 255, 255, 0.25);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #ffd6e8, #fbeaff);
+  overflow: hidden;
+}
+
+/* CENTER CARD */
+.wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+  padding: 40px 25px;
+  text-align: center;
+  border-radius: 28px;
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+  animation: fadeIn 1s ease;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: #444;
+  margin-bottom: 30px;
+}
+
+/* BUTTONS */
+.buttons {
+  position: relative;
+  height: 120px;
+}
+
+button {
+  border: none;
+  border-radius: 999px;
+  padding: 14px 32px;
+  font-size: 1.05rem;
+  cursor: pointer;
+  position: absolute;
+  transition: 0.25s ease;
+}
+
+#yesBtn {
+  background: var(--pink);
+  color: white;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 10px 25px rgba(255,77,109,0.5);
+}
+
+#yesBtn:hover {
+  transform: translateX(-50%) scale(1.08);
+}
+
+#noBtn {
+  background: #dee2e6;
+  color: #333;
+  left: 10%;
+}
+
+/* RESULT */
+.result {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result h2 {
+  color: var(--pink);
+  margin-bottom: 12px;
+}
+
+.result p {
+  font-size: 0.95rem;
+}
+
+.result img {
+  margin-top: 18px;
+  max-width: 260px;
+  border-radius: 22px;
+  box-shadow: 0 20px 35px rgba(0,0,0,0.25);
+}
+
+/* HEARTS */
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 18px;
+  animation: floatUp linear forwards;
+  opacity: 0.75;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* MUSIC OVERLAY */
+.music-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.music-box {
+  background: white;
+  padding: 28px;
+  border-radius: 22px;
+  text-align: center;
+  width: 85%;
+  max-width: 300px;
+  animation: fadeIn 0.8s ease;
+}
+
+.music-box h3 {
+  font-size: 1.1rem;
+  margin-bottom: 18px;
+}
+
+.music-box button {
+  position: static;
+  margin: 8px;
+}
+
+.yes-music {
+  background: var(--pink);
+  color: white;
+}
+
+.no-music {
+  background: #e9ecef;
+}
+
+/* MUSIC ICON */
+.music-btn {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  background: white;
+  border-radius: 50%;
+  padding: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  cursor: pointer;
+  z-index: 10;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC PROMPT -->
+<div class="music-overlay" id="musicOverlay">
+  <div class="music-box">
+    <h3>Are you ready for some baaad shiiiit? 🎶💖</h3>
+    <button class="yes-music" id="musicYes">Yes 🎶</button>
+    <button class="no-music" id="musicNo">Not yet 🙈</button>
+  </div>
+</div>
+
+<div class="music-btn" id="musicToggle">🔊</div>
+
+<div class="wrapper">
+  <div class="card" id="questionBox">
+    <h1>Will you be my Valentine? ❤️</h1>
+    <div class="subtitle">I promise unlimited love & snacks 🍫</div>
+
+    <div class="buttons">
+      <button id="yesBtn">YES 💖</button>
+      <button id="noBtn">NO 🙃</button>
+    </div>
+  </div>
+
+  <div class="card result" id="resultBox">
+    <h2>Yayyy! You said YES 💕</h2>
+    <p>
+      “Thank you 😄<br>
+      I admit… your boyfriend is better than me 😉🔥”
+    </p>
+    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2pxMnF0MXhheWk2bjVxY29yZ3Y3cHF5MmNnbGwxdzB1ZGI3Y3ZrdCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/GJmu7AdGw4DgYYAG7m/giphy.gif" alt="KL Rahul">
+  </div>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const questionBox = document.getElementById("questionBox");
+const resultBox = document.getElementById("resultBox");
+
+const music = document.getElementById("bgMusic");
+const musicToggle = document.getElementById("musicToggle");
+const overlay = document.getElementById("musicOverlay");
+const musicYes = document.getElementById("musicYes");
+const musicNo = document.getElementById("musicNo");
+
+/* MUSIC PROMPT */
+musicYes.onclick = () => {
+  music.play().catch(()=>{});
+  overlay.style.display = "none";
+};
+
+musicNo.onclick = () => {
+  overlay.style.display = "none";
+};
+
+/* MUSIC TOGGLE */
+musicToggle.onclick = () => {
+  if (music.paused) {
+    music.play();
+    musicToggle.textContent = "🔊";
+  } else {
+    music.pause();
+    musicToggle.textContent = "🔇";
+  }
+};
+
+/* NO BUTTON ESCAPE */
+function moveNoButton() {
+  const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+  const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+  noBtn.style.left = `${x}px`;
+  noBtn.style.top = `${y}px`;
+}
+noBtn.addEventListener("mouseenter", moveNoButton);
+noBtn.addEventListener("touchstart", moveNoButton);
+
+/* YES CLICK */
+yesBtn.onclick = () => {
+  questionBox.style.display = "none";
+  resultBox.style.display = "flex";
+  launchConfetti();
+};
+
+/* HEARTS */
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.textContent = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 7000);
+}
+setInterval(createHeart, 500);
+
+/* CONFETTI */
+function launchConfetti() {
+  for (let i = 0; i < 80; i++) {
+    const confetti = document.createElement("div");
+    confetti.textContent = "🎉";
+    confetti.style.position = "fixed";
+    confetti.style.left = Math.random() * 100 + "vw";
+    confetti.style.top = "-10px";
+    confetti.style.fontSize = "20px";
+    confetti.style.animation = "floatUp 3s linear forwards";
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 3000);
+  }
+}
+</script>
+
+</body>
+</html>
